@@ -9,6 +9,8 @@ namespace Viper.SharedKernel.Tests
         [Theory]
         [InlineData("Maicon", "Pereira", "Maicon Pereira")]
         [InlineData("Leandro", "Vieira", "Leandro Vieira")]
+        [InlineData("Naílton", "Estevão", "Naílton Estevão")]
+        [InlineData ("Vô", "João", "Vô João")]
         [InlineData("Zé A", "Vieira", "Zé A Vieira")]
         [InlineData("A", "B", "A B")]
         public void Construtor_NomeESobrenomeValido_ObjetoNomeCompleto(string nome, string sobrenome, string resultadoEsperado)
