@@ -6,6 +6,5 @@ namespace Viper.IdentidadeAcesso.Domain.Entities
     {
         public string Nome { get; private set; }
         public string SobreNome {get; private set;}
-
     }
 }
