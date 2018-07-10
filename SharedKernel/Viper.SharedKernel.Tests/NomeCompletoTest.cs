@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Viper.SharedKernel.ValuesObjects;
+using Viper.Common;
 
 namespace Viper.SharedKernel.Tests
 {
@@ -52,7 +53,7 @@ namespace Viper.SharedKernel.Tests
         {
             // Arrange
             // Act  
-            var exception = Assert.Throws<ArgumentException>(() =>
+            var exception = Assert.Throws<DomainException>(() =>
             {
                 new NomeCompleto(nome, sobrenome);
             });
@@ -68,7 +69,7 @@ namespace Viper.SharedKernel.Tests
         {
             // Arrange
             // Act              
-            var exception = Assert.Throws<ArgumentException>(() => 
+            var exception = Assert.Throws<DomainException>(() => 
             {
                 new NomeCompleto(nome, sobrenome);
             });
