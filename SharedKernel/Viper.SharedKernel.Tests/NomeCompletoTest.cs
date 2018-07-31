@@ -14,7 +14,7 @@ namespace Viper.SharedKernel.Tests
         [InlineData ("Vô", "João", "Vô João")]
         [InlineData("Zé A", "Vieira", "Zé A Vieira")]
         [InlineData("A", "B", "A B")]
-        public void Construtor_NomeESobrenomeValido_ObjetoNomeCompleto(string nome, string sobrenome, string resultadoEsperado)
+        public void Construtor_NomeESobrenomeValido_ObjetoNomeCompletoCriado(string nome, string sobrenome, string resultadoEsperado)
         {
             // Arrange
             // Act
@@ -49,7 +49,7 @@ namespace Viper.SharedKernel.Tests
         [InlineData ("A", null)]
         [InlineData (null, "A")]
         [InlineData (null, null)]
-        public void Construtor_NomeOuSobrenomeVazioOuApenasEspacoOuNulo_ArgumentException(string nome, string sobrenome)
+        public void Construtor_NomeOuSobrenomeVazioOuApenasEspacoOuNulo_DomainException(string nome, string sobrenome)
         {
             // Arrange
             // Act  
@@ -65,7 +65,7 @@ namespace Viper.SharedKernel.Tests
         [Theory]
         [InlineData ("12345", "67890")]
         [InlineData ("!@#$%¨&*", "_+{}[]")]
-        public void Construtor_NomeOuSobrenomeNaoPodeConterNumerosOuCaracteresEspeciais_ArgumentException(string nome, string sobrenome)
+        public void Construtor_NomeOuSobrenomeNaoPodeConterNumerosOuCaracteresEspeciais_DomainException(string nome, string sobrenome)
         {
             // Arrange
             // Act              

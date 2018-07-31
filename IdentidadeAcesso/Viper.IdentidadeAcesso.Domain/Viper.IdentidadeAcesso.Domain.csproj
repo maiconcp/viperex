@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Viper.Common\Viper.Common.csproj" />
+    <ProjectReference Include="..\..\SharedKernel\Viper.SharedKernel\Viper.SharedKernel.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
