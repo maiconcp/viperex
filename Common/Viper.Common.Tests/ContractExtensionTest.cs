@@ -2,7 +2,7 @@ using Flunt.Validations;
 using Viper.Common;
 using Xunit;
 
-namespace Viper.SharedKernel.Tests
+namespace Viper.Common.Tests
 {
     public class ContractExtensionTest
     {

@@ -13,8 +13,8 @@ namespace Viper.SharedKernel.ValuesObjects
         {           
             new Contract()
                 .Requires()
-                .IsNotNullOrWhiteSpace(nome, nameof(Nome), "O 'Nome' é obrigatório.")
-                .IsNotNullOrWhiteSpace(sobrenome, nameof(Sobrenome), "O 'Sobrenome' é obrigatório.")
+                .IsNotNullOrWhiteSpace(nome, nameof(Nome), Messages.RequiredField(nameof(Nome)))
+                .IsNotNullOrWhiteSpace(sobrenome, nameof(Sobrenome), Messages.RequiredField(nameof(Sobrenome)))
                 .IsFalse(TemCaracteresInvalidos(nome), nameof(nome), "O 'Nome' informado contém caracteres inválidos.")
                 .IsFalse(TemCaracteresInvalidos(sobrenome), nameof(sobrenome), "O 'Sobrenome' informado contém caracteres inválidos.")
                 .Check();

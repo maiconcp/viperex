@@ -12,7 +12,7 @@ namespace Viper.SharedKernel.ValuesObjects
         public Email(string enderecoDeEmail)
         {
             new Contract().Requires()
-                          .IsEmailOrEmpty(enderecoDeEmail, "E-mail", "E-mail inválido.")
+                          .IsEmailOrEmpty(enderecoDeEmail, nameof(Email), "E-mail inválido.")
                           .Check();
 
             EnderecoDeEmail = enderecoDeEmail;
