@@ -21,6 +21,6 @@ namespace Viper.Anuncio.Domain.Entities
                           .IsNotNullOrWhiteSpace(telefone, nameof(telefone), Messages.RequiredField("Telefone"))
                           .IsNotNullOrWhiteSpace(enderecoCompleto, nameof(EnderecoCompleto), Messages.RequiredField("Endereço Completo"))
                           .Check();
-        }        
+        }
     }
 }
