@@ -2,7 +2,7 @@ using System;
 using Flunt.Validations;
 using Viper.Common;
 
-namespace Viper.Anuncio.Domain.Events
+namespace Viper.Anuncios.Domain.Events
 {
     public class AnuncioVendidoEvent : DomainEventBase
     {

@@ -1,9 +1,9 @@
 using Flunt.Validations;
 using Viper.Common;
-using Viper.IdentidadeAcesso.Domain.ValuesObjects;
+using Viper.IdentidadesAcessos.Domain.ValuesObjects;
 using Viper.SharedKernel.ValuesObjects;
 
-namespace Viper.IdentidadeAcesso.Domain.Entities
+namespace Viper.IdentidadesAcessos.Domain.Entities
 {
     public class Usuario : Entity
     {

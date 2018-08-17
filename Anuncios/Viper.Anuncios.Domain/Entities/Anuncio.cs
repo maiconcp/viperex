@@ -1,11 +1,11 @@
 using System;
 using Flunt.Validations;
-using Viper.Anuncio.Domain.Events;
+using Viper.Anuncios.Domain.Events;
 using Viper.Common;
 
-namespace Viper.Anuncio.Domain.Entities
+namespace Viper.Anuncios.Domain.Entities
 {
-    public sealed class Anuncio2 : AggregateRoot
+    public sealed class Anuncio : AggregateRoot
     {
         public string Titulo { get; private set; }
 
@@ -17,21 +17,27 @@ namespace Viper.Anuncio.Domain.Entities
 
         public bool Vendido { get; private set; }
 
-        public Anuncio2(string titulo, string descricao, decimal preco)
+        public Anuncio(string titulo, string descricao, decimal preco)
         {
             new Contract().Requires()
                         .HasMaxLen(titulo, 100, nameof(titulo), "Título pode ter até cem caracteres")
                         .IsNotNullOrWhiteSpace(titulo, nameof(titulo), Messages.RequiredField(titulo))
                         .IsNotNullOrWhiteSpace(descricao, nameof(descricao), Messages.RequiredField(descricao))
+                        .IsGreaterThan(preco, 0, nameof(Preco), "O Preço deve ser maior do que zero.")
                         .Check();
 
             RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco));
         }
+
         public void MarcarComoVendido()
         {
-            // Validar se pode ser marcado como vendido.
+            new Contract().Requires()
+                          .IsFalse(Vendido, nameof(Vendido), "Anúncio já vendido.")
+                          .Check();
+
             RaiseEvent(new AnuncioVendidoEvent(Id, DateTime.Now));
         }
+        
         public void Apply(AnuncioCadastradoEvent @event)
         {
             Titulo = @event.Titulo;

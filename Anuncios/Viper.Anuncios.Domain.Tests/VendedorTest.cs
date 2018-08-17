@@ -1,9 +1,9 @@
 using System;
 using Xunit;
-using Viper.Anuncio.Domain.Entities;
+using Viper.Anuncios.Domain.Entities;
 using Viper.Common;
 
-namespace Viper.Anuncio.Domain.Tests
+namespace Viper.Anuncios.Domain.Tests
 {
     public class VendedorTest
     {

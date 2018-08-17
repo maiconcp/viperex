@@ -1,9 +1,9 @@
 using System;
 using Xunit;
-using Viper.IdentidadeAcesso.Domain.ValuesObjects;
+using Viper.IdentidadesAcessos.Domain.ValuesObjects;
 using Viper.Common;
 
-namespace Viper.IdentidadeAcesso.Tests
+namespace Viper.IdentidadesAcessos.Tests
 {
     public class SenhaTest
     {

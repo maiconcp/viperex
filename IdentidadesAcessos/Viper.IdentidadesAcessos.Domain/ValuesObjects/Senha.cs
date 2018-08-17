@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Flunt.Validations;
 using Viper.Common;
 
-namespace Viper.IdentidadeAcesso.Domain.ValuesObjects
+namespace Viper.IdentidadesAcessos.Domain.ValuesObjects
 {
     public class Senha : ValueObject<Senha>
     {

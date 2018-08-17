@@ -1,10 +1,10 @@
 using Viper.Common;
-using Viper.IdentidadeAcesso.Domain.Entities;
-using Viper.IdentidadeAcesso.Domain.ValuesObjects;
+using Viper.IdentidadesAcessos.Domain.Entities;
+using Viper.IdentidadesAcessos.Domain.ValuesObjects;
 using Viper.SharedKernel.ValuesObjects;
 using Xunit;
 
-namespace Viper.IdentidadeAcesso.Tests
+namespace Viper.IdentidadesAcessos.Tests
 {
     public class UsuarioTest
     {

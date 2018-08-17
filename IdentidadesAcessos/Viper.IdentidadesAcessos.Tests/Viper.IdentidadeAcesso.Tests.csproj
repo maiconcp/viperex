@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Viper.Anuncio.Domain\Viper.Anuncio.Domain.csproj" />
+    <ProjectReference Include="..\Viper.IdentidadesAcessos.Domain\Viper.IdentidadesAcessos.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\Viper.Common\Viper.Common.csproj" />
+    <ProjectReference Include="..\..\SharedKernel\Viper.SharedKernel\Viper.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

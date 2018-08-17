@@ -2,7 +2,7 @@ using System;
 using Flunt.Validations;
 using Viper.Common;
 
-namespace Viper.Anuncio.Domain.Entities
+namespace Viper.Anuncios.Domain.Entities
 {
     public class Vendedor : Entity
     {
