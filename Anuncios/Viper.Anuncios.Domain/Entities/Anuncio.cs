@@ -2,10 +2,12 @@ using System;
 using Flunt.Validations;
 using Viper.Anuncios.Domain.Events;
 using Viper.Common;
+using System.Collections.Generic;
+using Viper.Anuncios.Domain.ValuesObjects;
 
 namespace Viper.Anuncios.Domain.Entities
 {
-    public sealed class Anuncio : AggregateRoot
+    public sealed partial class Anuncio : AggregateRoot
     {
         public string Titulo { get; private set; }
 
@@ -15,7 +17,11 @@ namespace Viper.Anuncios.Domain.Entities
 
         public DateTime DataDaVenda { get; private set; }
 
-        public bool Vendido { get; private set; }
+        private List<Visualizacao> _visualizacoes = new List<Visualizacao>();
+        
+        public IReadOnlyList<Visualizacao> Visualizacoes => _visualizacoes; 
+
+        public Status Status { get; private set; }
 
         public Anuncio(string titulo, string descricao, decimal preco)
         {
@@ -32,23 +38,25 @@ namespace Viper.Anuncios.Domain.Entities
         public void MarcarComoVendido()
         {
             new Contract().Requires()
-                          .IsFalse(Vendido, nameof(Vendido), "Anúncio já vendido.")
+                          .IsTrue(Status.EhPublicado(), nameof(Status), "Anúncio não está mais disponível.")
                           .Check();
 
-            RaiseEvent(new AnuncioVendidoEvent(Id, DateTime.Now));
+            RaiseEvent(new AnuncioVendidoEvent(Id, DateTime.Now));            
         }
-        
-        public void Apply(AnuncioCadastradoEvent @event)
-        {
-            Titulo = @event.Titulo;
-            Descricao = @event.Descricao;
-            Preco = @event.Preco;
-        }        
 
-        public void Apply(AnuncioVendidoEvent @event)
+        public void Visualizar()
         {
-            DataDaVenda = @event.DataDaVenda;
-            Vendido = true;
+            var visualizacao = new Visualizacao(DateTime.Now);
+            RaiseEvent(new AnuncioVisualizadoEvent(Id, visualizacao));
+        }
+
+        public void Publicar()
+        {
+            new Contract().Requires()
+                          .IsTrue(Status.EhPendente(), nameof(Status), $"O anúncio deve estar {Status.Pendente}.")
+                          .Check();
+            
+            RaiseEvent(new AnuncioPublicadoEvent(Id));
         }
     }
 }

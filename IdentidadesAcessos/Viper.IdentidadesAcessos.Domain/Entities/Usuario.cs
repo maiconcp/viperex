@@ -5,7 +5,7 @@ using Viper.SharedKernel.ValuesObjects;
 
 namespace Viper.IdentidadesAcessos.Domain.Entities
 {
-    public class Usuario : Entity
+    public class Usuario : AggregateRoot
     {
         public NomeCompleto NomeCompleto { get; private set; }
         public Email Email { get; private set; }

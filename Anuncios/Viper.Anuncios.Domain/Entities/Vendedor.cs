@@ -4,7 +4,7 @@ using Viper.Common;
 
 namespace Viper.Anuncios.Domain.Entities
 {
-    public class Vendedor : Entity
+    public class Vendedor : AggregateRoot
     {
         public Guid IdUsuario { get; private set; }
         public string Telefone {get; private set;}
