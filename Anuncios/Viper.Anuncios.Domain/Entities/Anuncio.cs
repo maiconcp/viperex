@@ -58,5 +58,14 @@ namespace Viper.Anuncios.Domain.Entities
             
             RaiseEvent(new AnuncioPublicadoEvent(Id));
         }
+
+        public void Rejeitar()
+        {
+            new Contract().Requires()
+                          .IsTrue(Status.EhPendente(), nameof(Status), $"O anúncio deve estar {Status.Pendente}.")
+                          .Check();
+            
+            RaiseEvent(new AnuncioRejeitadoEvent(Id));
+        }
     }
 }

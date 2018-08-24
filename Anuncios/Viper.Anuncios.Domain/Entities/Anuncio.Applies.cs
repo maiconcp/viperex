@@ -32,5 +32,10 @@ namespace Viper.Anuncios.Domain.Entities
         {
             Status = Status.Publicado;
         }
+
+        public void Apply(AnuncioRejeitadoEvent @event)
+        {
+            Status = Status.Rejeitado;
+        }
     }
 }
