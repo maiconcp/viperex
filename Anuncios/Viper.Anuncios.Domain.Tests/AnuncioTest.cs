@@ -3,6 +3,8 @@ using Xunit;
 using Viper.Anuncios.Domain.Entities;
 using Viper.Common;
 using Viper.Anuncios.Domain.ValuesObjects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Viper.Anuncios.Domain.Tests
 {
@@ -13,13 +15,38 @@ namespace Viper.Anuncios.Domain.Tests
             return new Anuncio("Titulo", "Descricao", 10m);
         }
 
+        private Anuncio CriarAnuncioPorStatus(Status status)
+        {
+            var anuncio = CriarAnuncioValido();
+
+            if (status.EhPublicado())
+            {
+                anuncio.Publicar();
+            }
+            else if (status.EhRejeitado())
+            {
+                anuncio.Rejeitar();
+            }
+            else if (status.EhVendido())
+            {
+                anuncio.Publicar();
+                anuncio.Vender();
+            }
+            else if (status.EhExcluido())
+            {
+                anuncio.Excluir();
+            }
+
+            return anuncio;
+        }
+
         [Fact]
         public void Construtor_DadosValido_ObjetoCriado()
         {
             // Arrange
             // Act
             var anuncio = CriarAnuncioValido();
-            
+
             // Assert
             Assert.Equal("Titulo", anuncio.Titulo);
             Assert.Equal("Descricao", anuncio.Descricao);
@@ -48,11 +75,11 @@ namespace Viper.Anuncios.Domain.Tests
             var anuncio = CriarAnuncioValido();
             anuncio.Publicar();
             // Act
-            anuncio.MarcarComoVendido();
-            
+            anuncio.Vender();
+
             // Assert
             Assert.Equal(Status.Vendido, anuncio.Status);
-            Assert.Equal(DateTime.Now.Date, anuncio.DataDaVenda.Date);             
+            Assert.Equal(DateTime.Now.Date, anuncio.DataDaVenda.Date);
         }
 
         [Fact]
@@ -61,14 +88,14 @@ namespace Viper.Anuncios.Domain.Tests
             // Arrange
             var anuncio = CriarAnuncioValido();
             anuncio.Publicar();
-            anuncio.MarcarComoVendido();
+            anuncio.Vender();
 
             // Act          
             // Assert
-            Assert.Throws<DomainException>(() => anuncio.MarcarComoVendido());
+            Assert.Throws<DomainException>(() => anuncio.Vender());
         }
 
-        [Fact] 
+        [Fact]
         public void Visualizar_PrimeiraVisualizacao_VisualizacaoRegistrada()
         {
             // Arrange
@@ -129,6 +156,42 @@ namespace Viper.Anuncios.Domain.Tests
             // Act
             // Assert
             Assert.Throws<DomainException>(() => anuncio.Rejeitar());
+        }
+
+        [Fact]
+        public void Excluir_AnuncioEmStatusQuePodemSerExcluido_AnuncioExcluido()
+        {
+            foreach (var status in Status.Todos)
+            {
+                if (!status.PodeSerExcluido())
+                    continue;
+
+                // Arrange
+                var anuncio = CriarAnuncioPorStatus(status);
+
+                // Act
+                anuncio.Excluir();
+
+                // Assert
+                Assert.True(anuncio.Status.EhExcluido());
+            }
+        }
+
+        [Fact]
+        public void Excluir_AnuncioEmStatusQueNaoPodemSerExcluido_DomainException()
+        {
+            foreach (var status in Status.Todos)
+            {
+                if (status.PodeSerExcluido())
+                    continue;
+
+                // Arrange
+                var anuncio = CriarAnuncioPorStatus(status);
+
+                // Act
+                // Assert
+                Assert.Throws<DomainException>(() => anuncio.Excluir());
+            }
         }
     }
 }

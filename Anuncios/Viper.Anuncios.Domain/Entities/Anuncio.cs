@@ -35,7 +35,7 @@ namespace Viper.Anuncios.Domain.Entities
             RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco));
         }
 
-        public void MarcarComoVendido()
+        public void Vender()
         {
             new Contract().Requires()
                           .IsTrue(Status.EhPublicado(), nameof(Status), "Anúncio não está mais disponível.")
@@ -66,6 +66,15 @@ namespace Viper.Anuncios.Domain.Entities
                           .Check();
             
             RaiseEvent(new AnuncioRejeitadoEvent(Id));
+        }
+
+        public void Excluir()
+        {
+            new Contract().Requires()
+                          .IsTrue(Status.PodeSerExcluido(), nameof(Status), $"O anúncio não pode estar {Status}.")
+                          .Check();
+
+            Status = Status.Excluido;
         }
     }
 }
