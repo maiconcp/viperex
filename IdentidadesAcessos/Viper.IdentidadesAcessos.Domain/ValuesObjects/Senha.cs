@@ -17,10 +17,10 @@ namespace Viper.IdentidadesAcessos.Domain.ValuesObjects
                           .HasMinLen(senha, MIN_CARACTERES, "Senha", $"A senha deve ter no mínimo {MIN_CARACTERES} caracteres.")
                           .Check();
         }
-
+ 
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return _Senha;
-        }
+        }        
     }
 }

@@ -5,8 +5,11 @@
     <ProjectReference Include="..\..\SharedKernel\Viper.SharedKernel\Viper.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="flunt" Version="1.0.2" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
 </Project>

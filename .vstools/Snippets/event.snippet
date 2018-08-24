@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>event</Title>
+      <Author>
+      </Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>event</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>NomeEvento</ID>
+          <ToolTip>NomeEvento</ToolTip>
+          <Default>NomeEvento</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[public class $NomeEvento$Event : DomainEventBase
+{
+    public $NomeEvento$Event(Guid aggregateID) : base(aggregateID)
+    {
+        
+    }
+
+    private $NomeEvento$Event(Guid aggregateID, long aggregateVersion) : base(aggregateID, aggregateVersion)
+    {
+        
+    }
+
+    public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+    {
+        return new $NomeEvento$Event(aggregateId, aggregateVersion);
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

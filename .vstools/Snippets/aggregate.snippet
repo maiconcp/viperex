@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>aggregate</Title>
+      <Author>
+      </Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>aggregate</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Tipo</ID>
+          <ToolTip>Tipo</ToolTip>
+          <Default>Tipo</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Propriedade</ID>
+          <ToolTip>Propriedade</ToolTip>
+          <Default>Propriedade</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>parametro</ID>
+          <ToolTip>parametro</ToolTip>
+          <Default>parametro</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Agregado</ID>
+          <ToolTip>Agregado</ToolTip>
+          <Default>Agregado</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[public class $Agregado$ : AggregateRoot
+{
+    public $Tipo$ $Propriedade$ { get; private set; }
+
+    public $Agregado$($Tipo$ $parametro$)
+    {
+        new Contract().Requires()
+                      .$end$
+                      .Check();
+
+        $Propriedade$ = $parametro$;
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

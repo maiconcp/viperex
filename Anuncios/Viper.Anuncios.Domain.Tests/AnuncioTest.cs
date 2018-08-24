@@ -105,5 +105,30 @@ namespace Viper.Anuncios.Domain.Tests
             // Assert
             Assert.Throws<DomainException>(() => anuncio.Publicar());
         }
+
+        [Fact]
+        public void Rejeitar_AnuncioPendente_AnuncioRejeitado()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+
+            // Act
+            anuncio.Rejeitar();
+
+            // Assert
+            Assert.True(anuncio.Status.EhRejeitado());
+        }
+
+        [Fact]
+        public void Rejeitar_AnuncioJaPublicado_DomainException()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            anuncio.Publicar();
+
+            // Act
+            // Assert
+            Assert.Throws<DomainException>(() => anuncio.Rejeitar());
+        }
     }
 }

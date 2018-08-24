@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>theory</Title>
+      <Author>
+      </Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>theory</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Metodo</ID>
+          <ToolTip>Nome do método que será testado</ToolTip>
+          <Default>Metodo</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Condicao</ID>
+          <ToolTip>Sobre quais condições o metodo será testado</ToolTip>
+          <Default>Condicao</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>Resultado</ID>
+          <ToolTip>Resultado esperado do metodo nas condições especificadas</ToolTip>
+          <Default>Resultado</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>tipo</ID>
+          <ToolTip>tipo</ToolTip>
+          <Default>tipo</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>variavel</ID>
+          <ToolTip>variavel</ToolTip>
+          <Default>variavel</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Delimiter="$"><![CDATA[[Theory]
+[InlineData("")]
+public void $Metodo$_$Condicao$_$Resultado$($tipo$ $variavel$)
+{
+    // Arrange
+    $end$
+    // Act
+    
+    // Assert
+    
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
