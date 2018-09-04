@@ -19,16 +19,19 @@ namespace Viper.Anuncios.Domain.Entities
 
         public Status Status { get; private set; }
 
-        public Anuncio(string titulo, string descricao, decimal preco)
+        public CondicaoUso CondicaoUso { get; private set; }
+
+        public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso)
         {
             new Contract().Requires()
                         .HasMaxLen(titulo, 100, nameof(titulo), "Título pode ter até cem caracteres")
                         .IsNotNullOrWhiteSpace(titulo, nameof(titulo), Messages.RequiredField(titulo))
                         .IsNotNullOrWhiteSpace(descricao, nameof(descricao), Messages.RequiredField(descricao))
                         .IsGreaterThan(preco, 0, nameof(Preco), "O Preço deve ser maior do que zero.")
+                        .IsNotNull(condicaoUso, nameof(CondicaoUso), Messages.RequiredField("Condição de Uso"))
                         .Check();
 
-            RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco));
+            RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco, condicaoUso));
         }
 
         public void Vender()

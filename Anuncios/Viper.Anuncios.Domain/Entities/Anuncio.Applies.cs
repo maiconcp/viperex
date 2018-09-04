@@ -15,6 +15,7 @@ namespace Viper.Anuncios.Domain.Entities
             Descricao = @event.Descricao;
             Preco = @event.Preco;
             Status = Status.Pendente;
+            CondicaoUso = @event.CondicaoUso;
         }        
 
         public void Apply(AnuncioVendidoEvent @event)

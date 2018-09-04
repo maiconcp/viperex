@@ -12,7 +12,7 @@ namespace Viper.Anuncios.Domain.Tests
     {
         private Anuncio CriarAnuncioValido()
         {
-            return new Anuncio("Titulo", "Descricao", 10m);
+            return new Anuncio("Titulo", "Descricao", 10m, CondicaoUso.Usado);
         }
 
         private Anuncio CriarAnuncioPorStatus(Status status)
@@ -52,20 +52,22 @@ namespace Viper.Anuncios.Domain.Tests
             Assert.Equal("Descricao", anuncio.Descricao);
             Assert.Equal(10.0M, anuncio.Preco);
             Assert.Equal(Status.Pendente, anuncio.Status);
+            Assert.Equal(CondicaoUso.Usado, anuncio.CondicaoUso);
             Assert.Equal(1, anuncio.DomainEvents.Count);
         }
 
         [Theory]
-        [InlineData("", "Descricao", 10)]
-        [InlineData("Titulo", "", 10)]
-        [InlineData("Título", "Descricao", 0)]
-        [InlineData("Título", "Descricao", -10)]
-        public void Construtor_DadosInvalido_DomainException(string titulo, string descricao, decimal valor)
+        [InlineData("", "Descricao", 10, "Novo")]
+        [InlineData("Titulo", "", 10, "Novo")]
+        [InlineData("Título", "Descricao", 0, "Novo")]
+        [InlineData("Título", "Descricao", -10, "Novo")]
+        [InlineData("Título", "Descricao", 10, null)]
+        public void Construtor_DadosInvalido_DomainException(string titulo, string descricao, decimal valor, string condicaoUso)
         {
             // Arrange
             // Act
             // Assert
-            Assert.Throws<DomainException>(() => new Anuncio(titulo, descricao, valor));
+            Assert.Throws<DomainException>(() => new Anuncio(titulo, descricao, valor, condicaoUso == "Novo" ? CondicaoUso.Novo : null));
         }
 
         [Fact]
