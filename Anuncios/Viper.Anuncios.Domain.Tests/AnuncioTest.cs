@@ -94,20 +94,7 @@ namespace Viper.Anuncios.Domain.Tests
             // Assert
             Assert.Throws<DomainException>(() => anuncio.Vender());
         }
-
-        [Fact]
-        public void Visualizar_PrimeiraVisualizacao_VisualizacaoRegistrada()
-        {
-            // Arrange
-            var anuncio = CriarAnuncioValido();
-
-            // Act          
-            anuncio.Visualizar();
-
-            // Assert
-            Assert.Equal(1, anuncio.Visualizacoes.Count);
-        }
-
+        
         [Fact]
         public void Publicar_AnuncioPendente_AnuncioPublicado()
         {

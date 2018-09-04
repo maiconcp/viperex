@@ -23,11 +23,6 @@ namespace Viper.Anuncios.Domain.Entities
             Status = Status.Vendido;
         }
 
-        public void Apply(AnuncioVisualizadoEvent @event)
-        {
-            _visualizacoes.Add(@event.Visualizacao);
-        }
-
         public void Apply(AnuncioPublicadoEvent @event)
         {
             Status = Status.Publicado;

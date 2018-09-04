@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Viper.Common;
 
-namespace Viper.Anuncios.Domain.ValuesObjects
+namespace Viper.Estatisticas.Domain.ValuesObjects
 {
     public class Visualizacao : ValueObject<Visualizacao> 
     {

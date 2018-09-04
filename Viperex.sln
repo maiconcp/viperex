@@ -26,9 +26,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.SharedKernel.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.IdentidadesAcessos.Tests", "IdentidadesAcessos\Viper.IdentidadesAcessos.Tests\Viper.IdentidadesAcessos.Tests.csproj", "{EC963021-CEF6-453A-AA28-64ED12397909}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Anuncio.Domain.Tests", "Anuncios\Viper.Anuncios.Domain.Tests\Viper.Anuncios.Domain.Tests.csproj", "{A1B4BDB6-0580-4C43-AFAD-6D4BEA976CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Anuncios.Domain.Tests", "Anuncios\Viper.Anuncios.Domain.Tests\Viper.Anuncios.Domain.Tests.csproj", "{A1B4BDB6-0580-4C43-AFAD-6D4BEA976CFB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Common.Tests", "Common\Viper.Common.Tests\Viper.Common.Tests.csproj", "{F47B7BDB-1B65-42AC-9323-E54291CE9926}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Estatisticas", "Estatisticas", "{6730DA55-A158-4568-B3A5-6C0707B21D74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viper.Estatisticas.Domain", "Estatisticas\Viper.Estatisticas.Domain\Viper.Estatisticas.Domain.csproj", "{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,6 +152,18 @@ Global
 		{F47B7BDB-1B65-42AC-9323-E54291CE9926}.Release|x64.Build.0 = Release|Any CPU
 		{F47B7BDB-1B65-42AC-9323-E54291CE9926}.Release|x86.ActiveCfg = Release|Any CPU
 		{F47B7BDB-1B65-42AC-9323-E54291CE9926}.Release|x86.Build.0 = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|x64.Build.0 = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Debug|x86.Build.0 = Debug|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|x64.ActiveCfg = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|x64.Build.0 = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|x86.ActiveCfg = Release|Any CPU
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +178,7 @@ Global
 		{EC963021-CEF6-453A-AA28-64ED12397909} = {FCF87180-1FB0-4384-A428-BDBB42AA4313}
 		{A1B4BDB6-0580-4C43-AFAD-6D4BEA976CFB} = {CC4D9453-21B3-4975-9EC8-365953549484}
 		{F47B7BDB-1B65-42AC-9323-E54291CE9926} = {137447B1-925E-4494-A499-B4D7D5C94959}
+		{ADBA4FB4-EB0D-4B4B-8B32-CA5E69402CA7} = {6730DA55-A158-4568-B3A5-6C0707B21D74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6819C959-18D0-46A0-B502-D4613C479E69}

@@ -17,10 +17,6 @@ namespace Viper.Anuncios.Domain.Entities
 
         public DateTime DataDaVenda { get; private set; }
 
-        private List<Visualizacao> _visualizacoes = new List<Visualizacao>();
-        
-        public IReadOnlyList<Visualizacao> Visualizacoes => _visualizacoes; 
-
         public Status Status { get; private set; }
 
         public Anuncio(string titulo, string descricao, decimal preco)
@@ -42,12 +38,6 @@ namespace Viper.Anuncios.Domain.Entities
                           .Check();
 
             RaiseEvent(new AnuncioVendidoEvent(Id, DateTime.Now));            
-        }
-
-        public void Visualizar()
-        {
-            var visualizacao = new Visualizacao(DateTime.Now);
-            RaiseEvent(new AnuncioVisualizadoEvent(Id, visualizacao));
         }
 
         public void Publicar()

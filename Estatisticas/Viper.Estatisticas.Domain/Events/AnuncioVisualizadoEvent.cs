@@ -1,9 +1,9 @@
 using System;
 using Flunt.Validations;
-using Viper.Anuncios.Domain.ValuesObjects;
+using Viper.Estatisticas.Domain.ValuesObjects;
 using Viper.Common;
 
-namespace Viper.Anuncios.Domain.Events
+namespace Viper.Estatisticas.Domain.Events
 {
     public class AnuncioVisualizadoEvent : DomainEventBase
     {
