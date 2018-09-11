@@ -34,5 +34,10 @@ namespace Viper.Anuncios.Domain.Entities
         {
             Status = Status.Rejeitado;
         }
+
+        public void Apply(FotoAdicionadaAnuncioEvent @event)
+        {
+            Fotos = Fotos.Adicionar(@event.Foto);
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace Viper.Anuncios.Domain.Entities
 
         public void AdicionarFoto(Foto foto)
         {
-            Fotos = Fotos.Adicionar(foto);
+            RaiseEvent(new FotoAdicionadaAnuncioEvent(Id, foto));
         }
 
         public void RemoverFoto(Foto foto)
