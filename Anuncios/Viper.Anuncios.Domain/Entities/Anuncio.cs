@@ -79,12 +79,12 @@ namespace Viper.Anuncios.Domain.Entities
 
         public void RemoverFoto(Foto foto)
         {
-            Fotos = Fotos.Remover(foto);
+            RaiseEvent(new FotoRemovidaAnuncioEvent(Id, foto));
         }
 
         public void RemoverTodasFotos()
         {
-            Fotos = Fotos.Limpar();
+            RaiseEvent(new TodasFotosRemovidasAnuncioEvent(Id));
         }
     }
 }

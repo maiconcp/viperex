@@ -39,5 +39,15 @@ namespace Viper.Anuncios.Domain.Entities
         {
             Fotos = Fotos.Adicionar(@event.Foto);
         }
+
+        public void Apply(FotoRemovidaAnuncioEvent @event)
+        {
+            Fotos = Fotos.Remover(@event.Foto);
+        }
+
+        public void Apply(TodasFotosRemovidasAnuncioEvent @event)
+        {
+            Fotos = Fotos.Limpar();
+        }
     }
 }
