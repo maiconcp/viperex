@@ -15,6 +15,8 @@ namespace Viper.Anuncios.Domain.Tests
             return new Anuncio("Titulo", "Descricao", 10m, CondicaoUso.Usado);
         }
 
+        private const string URL_PNG_VALIDA = "http://www.viperex.com.br/images/foto1.png";
+
         private Anuncio CriarAnuncioPorStatus(Status status)
         {
             var anuncio = CriarAnuncioValido();
@@ -181,6 +183,208 @@ namespace Viper.Anuncios.Domain.Tests
                 // Assert
                 Assert.Throws<DomainException>(() => anuncio.Excluir());
             }
+        }
+
+        [Fact]
+        public void AdicionarFoto_AdicionarPrimeiraFoto_FotoDefinidaComoCapa()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();            
+            var foto = new Foto(new Uri(URL_PNG_VALIDA));
+
+            // Act
+            anuncio.AdicionarFoto(foto);
+
+            // Assert
+            Assert.Equal(foto, anuncio.Fotos.Capa);
+        }
+
+        [Fact]
+        public void AdicionarFoto_AdicionarSegundaFoto_APrimeiraFotoContinuaComoCapa()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var foto1 = new Foto(new Uri(URL_PNG_VALIDA));
+            var foto2 = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
+            anuncio.AdicionarFoto(foto1);
+
+            // Act
+            anuncio.AdicionarFoto(foto2);
+
+            // Assert
+            Assert.Equal(foto1, anuncio.Fotos.Capa);
+        }
+
+        [Fact]
+        public void AdicionarFoto_AdicionarSextaFoto_AlbumCompleto()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "3.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "4.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "5.png")));
+            
+            // Act
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "6.png")));
+
+            // Assert
+            Assert.True(anuncio.Fotos.Completo);
+        }
+
+        [Fact]
+        public void AdicionarFoto_AdicionarSetimaFoto_DomainException()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "3.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "4.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "5.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "6.png")));
+
+            // Act
+            // Assert
+            Assert.Throws<DomainException>(() => anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "7.png"))));
+        }
+
+        [Fact]
+        public void Adicionar_AdicionarFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+
+            // Act
+            anuncio.Fotos.Adicionar(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
+
+            // Assert
+            Assert.True(anuncio.Fotos.Vazio);
+        }
+
+        [Fact]
+        public void RemoverFoto_AlbumVazio_DomainException()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var foto = new Foto(new Uri(URL_PNG_VALIDA));
+
+            // Act
+            // Assert
+            Assert.Throws<DomainException>(() => anuncio.RemoverFoto(foto));
+        }
+
+        [Fact]
+        public void RemoverFoto_RemoverFotoQueNaoEhDoAlbum_DomainException()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var foto = new Foto(new Uri(URL_PNG_VALIDA));
+            var foto2 = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
+
+            // Act
+            anuncio.AdicionarFoto(foto);
+
+            // Assert
+            Assert.Throws<DomainException>(() => anuncio.RemoverFoto(foto2));
+        }
+
+        [Fact]
+        public void RemoverFoto_AlbumComDuasFotosAoRemoverPrimeiraFoto_SegundaFotoSeTornaCapa()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
+            var segundaFoto = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
+            anuncio.AdicionarFoto(primeiraFoto);
+            anuncio.AdicionarFoto(segundaFoto);
+
+            // Act
+
+            anuncio.RemoverFoto(primeiraFoto);
+
+            // Assert
+            Assert.Equal(segundaFoto, anuncio.Fotos.Capa);
+        }
+
+        [Fact]
+        public void RemoverFoto_AlbumComUmaFotoAoRemover_AlbumVazio()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
+            anuncio.AdicionarFoto(primeiraFoto);
+
+            // Act
+            anuncio.RemoverFoto(primeiraFoto);
+
+            // Assert
+            Assert.True(anuncio.Fotos.Vazio);
+        }
+
+        [Fact]
+        public void Remover_RemoverFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
+            anuncio.AdicionarFoto(primeiraFoto);
+
+            // Act
+            anuncio.Fotos.Remover(primeiraFoto);
+
+            // Assert
+            Assert.False(anuncio.Fotos.Vazio);
+        }
+
+        [Fact]
+        public void Limpar_LimparFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
+            anuncio.AdicionarFoto(primeiraFoto);
+
+            // Act
+            anuncio.Fotos.Limpar();
+
+            // Assert
+            Assert.False(anuncio.Fotos.Vazio);
+        }
+
+        [Fact]
+        public void RemoverTodasFotos_AlbumComFotos_AlbumVazio()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "3.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "4.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "5.png")));
+            anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "6.png")));
+
+            // Act
+            anuncio.RemoverTodasFotos();
+
+            // Assert
+            Assert.True(anuncio.Fotos.Vazio);
+        }
+
+        [Fact]
+        public void RemoverTodasFotos_AlbumSemFotos_AlbumVazioNaoLancaExcecao()
+        {
+            // Arrange
+            var anuncio = CriarAnuncioValido();
+
+            // Act
+            anuncio.RemoverTodasFotos();
+
+            // Assert
+            Assert.True(anuncio.Fotos.Vazio);
         }
     }
 }

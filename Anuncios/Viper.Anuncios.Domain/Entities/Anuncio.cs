@@ -21,6 +21,8 @@ namespace Viper.Anuncios.Domain.Entities
 
         public CondicaoUso CondicaoUso { get; private set; }
 
+        public AlbumFotos Fotos { get; private set; }
+
         public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso)
         {
             new Contract().Requires()
@@ -68,6 +70,21 @@ namespace Viper.Anuncios.Domain.Entities
                           .Check();
 
             Status = Status.Excluido;
+        }
+
+        public void AdicionarFoto(Foto foto)
+        {
+            Fotos = Fotos.Adicionar(foto);
+        }
+
+        public void RemoverFoto(Foto foto)
+        {
+            Fotos = Fotos.Remover(foto);
+        }
+
+        public void RemoverTodasFotos()
+        {
+            Fotos = Fotos.Limpar();
         }
     }
 }
