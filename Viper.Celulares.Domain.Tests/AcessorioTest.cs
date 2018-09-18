@@ -32,5 +32,7 @@ namespace Viper.Celulares.Domain.Tests
             // Assert
             Assert.Throws<DomainException>(() => new Acessorio(descricaoInvalida));
         }
+
+
     }
 }

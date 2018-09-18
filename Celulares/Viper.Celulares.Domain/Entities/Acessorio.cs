@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Viper.Celulares.Domain.Events;
 using Viper.Common;
 
 namespace Viper.Celulares.Domain.Entities
@@ -13,9 +14,9 @@ namespace Viper.Celulares.Domain.Entities
         {
             new Contract().Requires()
                           .IsNotNullOrWhiteSpace(descricao, nameof(Descricao),Messages.RequiredField("Descrição"))
-                          .Check();
+                          .Check();            
 
-            Descricao = descricao;
+            RaiseEvent(new AcessorioCadastradoEvent(Id, descricao));
         }
     }
 }
