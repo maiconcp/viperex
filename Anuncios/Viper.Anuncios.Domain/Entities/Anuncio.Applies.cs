@@ -17,6 +17,7 @@ namespace Viper.Anuncios.Domain.Entities
             Status = Status.Pendente;
             CondicaoUso = @event.CondicaoUso;
             Fotos = new AlbumFotos();
+            AceitoTroca = @event.AceitoTroca;
         }        
 
         public void Apply(AnuncioVendidoEvent @event)

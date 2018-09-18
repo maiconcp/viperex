@@ -12,7 +12,7 @@ namespace Viper.Anuncios.Domain.Tests
     {
         private Anuncio CriarAnuncioValido()
         {
-            return new Anuncio("Titulo", "Descricao", 10m, CondicaoUso.Usado);
+            return new Anuncio("Titulo", "Descricao", 10m, CondicaoUso.Usado, aceitoTroca: true);
         }
 
         private const string URL_PNG_VALIDA = "http://www.viperex.com.br/images/foto1.png";
@@ -69,7 +69,7 @@ namespace Viper.Anuncios.Domain.Tests
             // Arrange
             // Act
             // Assert
-            Assert.Throws<DomainException>(() => new Anuncio(titulo, descricao, valor, condicaoUso == "Novo" ? CondicaoUso.Novo : null));
+            Assert.Throws<DomainException>(() => new Anuncio(titulo, descricao, valor, condicaoUso == "Novo" ? CondicaoUso.Novo : null, aceitoTroca: true));
         }
 
         [Fact]

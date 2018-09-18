@@ -15,7 +15,9 @@ namespace Viper.Anuncios.Domain.Events
 
         public CondicaoUso CondicaoUso { get; private set; }
 
-        public AnuncioCadastradoEvent(Guid aggregateID, string titulo, string descricao, decimal preco, CondicaoUso condicaoUso) : base(aggregateID)
+        public bool AceitoTroca { get; private set; }
+
+        public AnuncioCadastradoEvent(Guid aggregateID, string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca) : base(aggregateID)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -23,7 +25,7 @@ namespace Viper.Anuncios.Domain.Events
             CondicaoUso = condicaoUso;
         }
 
-        private AnuncioCadastradoEvent(Guid aggregateID, long aggregateVersion, string titulo, string descricao, decimal preco, CondicaoUso condicaoUso) : base(aggregateID, aggregateVersion)
+        private AnuncioCadastradoEvent(Guid aggregateID, long aggregateVersion, string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca) : base(aggregateID, aggregateVersion)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -33,7 +35,7 @@ namespace Viper.Anuncios.Domain.Events
 
         public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
         {
-            return new AnuncioCadastradoEvent(aggregateId, aggregateVersion, Titulo, Descricao, Preco, CondicaoUso);
+            return new AnuncioCadastradoEvent(aggregateId, aggregateVersion, Titulo, Descricao, Preco, CondicaoUso, AceitoTroca);
         }
     }
 }

@@ -23,7 +23,9 @@ namespace Viper.Anuncios.Domain.Entities
 
         public AlbumFotos Fotos { get; private set; }
 
-        public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso)
+        public bool AceitoTroca { get; private set; }
+
+        public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca)
         {
             new Contract().Requires()
                         .HasMaxLen(titulo, 100, nameof(titulo), "Título pode ter até cem caracteres")
@@ -33,7 +35,7 @@ namespace Viper.Anuncios.Domain.Entities
                         .IsNotNull(condicaoUso, nameof(CondicaoUso), Messages.RequiredField("Condição de Uso"))
                         .Check();
 
-            RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco, condicaoUso));
+            RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco, condicaoUso, aceitoTroca));
         }
 
         public void Vender()
