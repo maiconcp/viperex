@@ -6,21 +6,15 @@ using Viper.Common;
 namespace Viper.Anuncios.Domain.ValuesObjects
 {
 
-    public class CondicaoUso : ValueObject<CondicaoUso>
+    public class CondicaoUso : Enumeration<CondicaoUso>
     {
-        public string Descricao { get; private set; }
+        public static readonly CondicaoUso Novo = new CondicaoUso(1, nameof(Novo));
+        public static readonly CondicaoUso Usado = new CondicaoUso(2, nameof(Usado));
 
-        public static CondicaoUso Novo => new CondicaoUso(nameof(Novo));
-        public static CondicaoUso Usado => new CondicaoUso(nameof(Usado));
-
-        private CondicaoUso(string descricao)
+        private CondicaoUso(int id, string descricao)
+            : base(id, descricao)
         {
-            Descricao = descricao;
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Descricao;
+            
         }
     }
 }

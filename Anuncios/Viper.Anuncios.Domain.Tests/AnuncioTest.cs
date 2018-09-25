@@ -152,7 +152,7 @@ namespace Viper.Anuncios.Domain.Tests
         [Fact]
         public void Excluir_AnuncioEmStatusQuePodemSerExcluido_AnuncioExcluido()
         {
-            foreach (var status in Status.Todos)
+            foreach (var status in Status.GetAll())
             {
                 if (!status.PodeSerExcluido())
                     continue;
@@ -171,7 +171,7 @@ namespace Viper.Anuncios.Domain.Tests
         [Fact]
         public void Excluir_AnuncioEmStatusQueNaoPodemSerExcluido_DomainException()
         {
-            foreach (var status in Status.Todos)
+            foreach (var status in Status.GetAll())
             {
                 if (status.PodeSerExcluido())
                     continue;

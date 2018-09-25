@@ -5,24 +5,19 @@ using Viper.Common;
 
 namespace Viper.Anuncios.Domain.ValuesObjects
 {
-    public class Status : ValueObject<Status>
-    {
-        public string Descricao { get; private set; }
+    public class Status : Enumeration<Status>
+    {       
 
-        public static Status Pendente => new Status(nameof(Pendente));
-        public static Status Vendido => new Status(nameof(Vendido));
-        public static Status Publicado => new Status(nameof(Publicado));
-        public static Status Rejeitado => new Status(nameof(Rejeitado));
-        public static Status Excluido => new Status(nameof(Excluido));
+        public static readonly Status Pendente = new Status(1, nameof(Pendente));
+        public static readonly Status Vendido = new Status(2, nameof(Vendido));
+        public static readonly Status Publicado = new Status(3, nameof(Publicado));
+        public static readonly Status Rejeitado = new Status(4, nameof(Rejeitado));
+        public static readonly Status Excluido = new Status(5, nameof(Excluido));
+   
 
-        protected Status(string descricao)
+        private Status(int id, string descricao)
+            : base(id, descricao)
         {
-            Descricao = descricao;
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Descricao;
         }
 
         public bool EhPendente()
@@ -55,19 +50,5 @@ namespace Viper.Anuncios.Domain.ValuesObjects
             return !EhExcluido() && !EhVendido();
         }
 
-        public override string ToString()
-        {
-            return Descricao;
-        }
-
-        public static IEnumerable<Status> Todos =>
-            new List<Status>
-            {
-                Pendente,
-                Publicado,
-                Rejeitado,
-                Vendido,
-                Excluido
-            };
     }
 }
