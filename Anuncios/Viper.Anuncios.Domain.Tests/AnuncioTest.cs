@@ -10,44 +10,14 @@ namespace Viper.Anuncios.Domain.Tests
 {
     public class AnuncioTest
     {
-        private Anuncio CriarAnuncioValido()
-        {
-            return new Anuncio("Titulo", "Descricao", 10m, CondicaoUso.Usado, aceitoTroca: true);
-        }
-
         private const string URL_PNG_VALIDA = "http://www.viperex.com.br/images/foto1.png";
-
-        private Anuncio CriarAnuncioPorStatus(Status status)
-        {
-            var anuncio = CriarAnuncioValido();
-
-            if (status.EhPublicado())
-            {
-                anuncio.Publicar();
-            }
-            else if (status.EhRejeitado())
-            {
-                anuncio.Rejeitar();
-            }
-            else if (status.EhVendido())
-            {
-                anuncio.Publicar();
-                anuncio.Vender();
-            }
-            else if (status.EhExcluido())
-            {
-                anuncio.Excluir();
-            }
-
-            return anuncio;
-        }
 
         [Fact]
         public void Construtor_DadosValido_ObjetoCriado()
         {
             // Arrange
             // Act
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             // Assert
             Assert.Equal("Titulo", anuncio.Titulo);
@@ -76,7 +46,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void MarcarComoVendido_AnuncioAindaNaoVendido_AnuncioMarcadoComoVendido()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             anuncio.Publicar();
             // Act
             anuncio.Vender();
@@ -90,7 +60,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void MarcarComoVendido_AnuncioJaVendido_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             anuncio.Publicar();
             anuncio.Vender();
 
@@ -103,7 +73,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Publicar_AnuncioPendente_AnuncioPublicado()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             // Act
             anuncio.Publicar();
@@ -116,7 +86,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Publicar_AnuncioJaPublicado_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             anuncio.Publicar();
 
             // Act
@@ -128,7 +98,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Rejeitar_AnuncioPendente_AnuncioRejeitado()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             // Act
             anuncio.Rejeitar();
@@ -141,7 +111,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Rejeitar_AnuncioJaPublicado_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             anuncio.Publicar();
 
             // Act
@@ -158,7 +128,7 @@ namespace Viper.Anuncios.Domain.Tests
                     continue;
 
                 // Arrange
-                var anuncio = CriarAnuncioPorStatus(status);
+                var anuncio = AnuncioFakeFactory.CriarAnuncioPorStatus(status);
 
                 // Act
                 anuncio.Excluir();
@@ -177,7 +147,7 @@ namespace Viper.Anuncios.Domain.Tests
                     continue;
 
                 // Arrange
-                var anuncio = CriarAnuncioPorStatus(status);
+                var anuncio = AnuncioFakeFactory.CriarAnuncioPorStatus(status);
 
                 // Act
                 // Assert
@@ -189,7 +159,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void AdicionarFoto_AdicionarPrimeiraFoto_FotoDefinidaComoCapa()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();            
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();            
             var foto = new Foto(new Uri(URL_PNG_VALIDA));
 
             // Act
@@ -203,7 +173,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void AdicionarFoto_AdicionarSegundaFoto_APrimeiraFotoContinuaComoCapa()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var foto1 = new Foto(new Uri(URL_PNG_VALIDA));
             var foto2 = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
             anuncio.AdicionarFoto(foto1);
@@ -219,7 +189,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void AdicionarFoto_AdicionarSextaFoto_AlbumCompleto()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
@@ -238,7 +208,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void AdicionarFoto_AdicionarSetimaFoto_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
@@ -256,7 +226,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Adicionar_AdicionarFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             // Act
             anuncio.Fotos.Adicionar(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
@@ -269,7 +239,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverFoto_AlbumVazio_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var foto = new Foto(new Uri(URL_PNG_VALIDA));
 
             // Act
@@ -281,7 +251,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverFoto_RemoverFotoQueNaoEhDoAlbum_DomainException()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var foto = new Foto(new Uri(URL_PNG_VALIDA));
             var foto2 = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
 
@@ -296,7 +266,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverFoto_AlbumComDuasFotosAoRemoverPrimeiraFoto_SegundaFotoSeTornaCapa()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
             var segundaFoto = new Foto(new Uri(URL_PNG_VALIDA + "2.png"));
             anuncio.AdicionarFoto(primeiraFoto);
@@ -314,7 +284,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverFoto_AlbumComUmaFotoAoRemover_AlbumVazio()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
             anuncio.AdicionarFoto(primeiraFoto);
 
@@ -329,7 +299,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Remover_RemoverFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
             anuncio.AdicionarFoto(primeiraFoto);
 
@@ -344,7 +314,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void Limpar_LimparFotoDiretamentePeloAlbumFoto_NaoDeveAlterarOAlbum()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             var primeiraFoto = new Foto(new Uri(URL_PNG_VALIDA));
             anuncio.AdicionarFoto(primeiraFoto);
 
@@ -359,7 +329,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverTodasFotos_AlbumComFotos_AlbumVazio()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "1.png")));
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "2.png")));
             anuncio.AdicionarFoto(new Foto(new Uri(URL_PNG_VALIDA + "3.png")));
@@ -378,7 +348,7 @@ namespace Viper.Anuncios.Domain.Tests
         public void RemoverTodasFotos_AlbumSemFotos_AlbumVazioNaoLancaExcecao()
         {
             // Arrange
-            var anuncio = CriarAnuncioValido();
+            var anuncio = AnuncioFakeFactory.CriarAnuncioValido();
 
             // Act
             anuncio.RemoverTodasFotos();
