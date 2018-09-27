@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Anuncios\Viper.Anuncios.Domain\Viper.Anuncios.Domain.csproj" />
     <ProjectReference Include="..\..\Common\Viper.Common\Viper.Common.csproj" />
   </ItemGroup>
 

@@ -8,17 +8,17 @@ namespace Viper.Anuncios.Domain.Events
     {
         public DateTime DataDaVenda { get; private set; }
 
-        public AnuncioVendidoEvent(Guid aggregateID, DateTime dataDaVenda) : base(aggregateID)
+        public AnuncioVendidoEvent(Identity aggregateID, DateTime dataDaVenda) : base(aggregateID)
         {
             DataDaVenda = dataDaVenda;
         }
 
-        private AnuncioVendidoEvent(Guid aggregateID, long aggregateVersion, DateTime dataDaVenda) : base(aggregateID, aggregateVersion)
+        private AnuncioVendidoEvent(Identity aggregateID, long aggregateVersion, DateTime dataDaVenda) : base(aggregateID, aggregateVersion)
         {
             DataDaVenda = dataDaVenda;
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new AnuncioVendidoEvent(aggregateId, aggregateVersion, DataDaVenda);
         }

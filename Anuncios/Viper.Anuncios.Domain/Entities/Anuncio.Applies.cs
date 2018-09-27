@@ -7,10 +7,11 @@ using Viper.Anuncios.Domain.ValuesObjects;
 
 namespace Viper.Anuncios.Domain.Entities
 {
-    public sealed partial class Anuncio : AggregateRoot
+    public partial class Anuncio : AggregateRoot
     {
         public void Apply(AnuncioCadastradoEvent @event)
         {
+            Id = @event.AggregateId;
             Titulo = @event.Titulo;
             Descricao = @event.Descricao;
             Preco = @event.Preco;

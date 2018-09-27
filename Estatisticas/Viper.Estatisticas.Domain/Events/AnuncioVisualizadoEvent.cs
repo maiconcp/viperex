@@ -9,17 +9,17 @@ namespace Viper.Estatisticas.Domain.Events
     {
         public Visualizacao Visualizacao { get; private set; }
 
-        public AnuncioVisualizadoEvent(Guid aggregateID, Visualizacao visualizacao) : base(aggregateID)
+        public AnuncioVisualizadoEvent(Identity aggregateID, Visualizacao visualizacao) : base(aggregateID)
         {
             Visualizacao = visualizacao;
         }
 
-        private AnuncioVisualizadoEvent(Guid aggregateID, long aggregateVersion, Visualizacao visualizacao) : base(aggregateID, aggregateVersion)
+        private AnuncioVisualizadoEvent(Identity aggregateID, long aggregateVersion, Visualizacao visualizacao) : base(aggregateID, aggregateVersion)
         {
             Visualizacao = visualizacao;
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new AnuncioVisualizadoEvent(aggregateId, aggregateVersion, Visualizacao);
         }

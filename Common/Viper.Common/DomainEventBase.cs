@@ -8,22 +8,22 @@ namespace Viper.Common
     {
         protected DomainEventBase()
         {
-            EventId = Guid.NewGuid();
+            EventId = Identity.CreateNew();
         }
 
-        protected DomainEventBase(Guid aggregateId) : this()
+        protected DomainEventBase(Identity aggregateId) : this()
         {
             AggregateId = aggregateId;
         }
 
-        protected DomainEventBase(Guid aggregateId, long aggregateVersion) : this(aggregateId)
+        protected DomainEventBase(Identity aggregateId, long aggregateVersion) : this(aggregateId)
         {
             AggregateVersion = aggregateVersion;
         }
 
-        public Guid EventId { get; private set; }
+        public Identity EventId { get; private set; }
 
-        public Guid AggregateId { get; private set; }
+        public Identity AggregateId { get; private set; }
 
         public long AggregateVersion { get; private set; }
         protected override IEnumerable<object> GetEqualityComponents()
@@ -32,6 +32,6 @@ namespace Viper.Common
             yield return AggregateId;
             yield return AggregateVersion;
         }
-        public abstract DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion);
+        public abstract DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion);
     }
 }

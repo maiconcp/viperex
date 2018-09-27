@@ -12,7 +12,7 @@ namespace Viper.Anuncios.Domain.Tests
         {
             // Arrange
             // Act
-            var vendedor = new Vendedor(new Guid(), "4799917774", "Rua Dublin");
+            var vendedor = new Vendedor(Identity.CreateNew(), "4799917774", "Rua Dublin");
             
             // Assert
             Assert.NotNull(vendedor);
@@ -26,7 +26,7 @@ namespace Viper.Anuncios.Domain.Tests
             // Arrange
             // Act
             // Assert
-            Assert.Throws<DomainException>(() => new Vendedor(new Guid(), numeroTelefone, endereco));
+            Assert.Throws<DomainException>(() => new Vendedor(Identity.CreateNew(), numeroTelefone, endereco));
         }        
     }
 }

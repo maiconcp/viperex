@@ -7,15 +7,15 @@ namespace Viper.Anuncios.Domain.Events
 {
     public class AnuncioRejeitadoEvent : DomainEventBase
     {
-        public AnuncioRejeitadoEvent(Guid aggregateID) : base(aggregateID)
+        public AnuncioRejeitadoEvent(Identity aggregateID) : base(aggregateID)
         {            
         }
 
-        private AnuncioRejeitadoEvent(Guid aggregateID, long aggregateVersion) : base(aggregateID, aggregateVersion)
+        private AnuncioRejeitadoEvent(Identity aggregateID, long aggregateVersion) : base(aggregateID, aggregateVersion)
         {            
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new AnuncioRejeitadoEvent(aggregateId, aggregateVersion);
         }

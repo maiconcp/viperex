@@ -8,17 +8,17 @@ namespace Viper.Anuncios.Domain.Events
     
     public class TodasFotosRemovidasAnuncioEvent : DomainEventBase
     {        
-        public TodasFotosRemovidasAnuncioEvent(Guid aggregateID) : base(aggregateID)
+        public TodasFotosRemovidasAnuncioEvent(Identity aggregateID) : base(aggregateID)
         {
 
         }
 
-        private TodasFotosRemovidasAnuncioEvent(Guid aggregateID, long aggregateVersion) : base(aggregateID, aggregateVersion)
+        private TodasFotosRemovidasAnuncioEvent(Identity aggregateID, long aggregateVersion) : base(aggregateID, aggregateVersion)
         {
 
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new TodasFotosRemovidasAnuncioEvent(aggregateId, aggregateVersion);
         }

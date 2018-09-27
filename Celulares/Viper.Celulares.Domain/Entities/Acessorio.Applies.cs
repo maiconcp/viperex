@@ -10,6 +10,7 @@ namespace Viper.Celulares.Domain.Entities
     {
         public void Apply(AcessorioCadastradoEvent @event)
         {
+            Id = @event.AggregateId;
             Descricao = @event.Descricao;
         }
     }

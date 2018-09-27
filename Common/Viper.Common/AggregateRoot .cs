@@ -22,9 +22,7 @@ namespace Viper.Common
         protected void RaiseEvent<TEvent>(TEvent @event)
             where TEvent: DomainEventBase
         {
-            DomainEventBase eventWithAggregate = @event.WithAggregate(
-                Equals(Id, default(Guid)) ? @event.AggregateId : Id, 
-                _version);
+            DomainEventBase eventWithAggregate = @event.WithAggregate(Id, _version);
 
             ApplyEvent(eventWithAggregate, _version + 1);
             _domainEvents.Add(eventWithAggregate);

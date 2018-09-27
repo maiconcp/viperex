@@ -10,17 +10,17 @@ namespace Viper.Anuncios.Domain.Events
     {
         public Foto Foto { get; private set; }
 
-        public FotoAdicionadaAnuncioEvent(Guid aggregateID, Foto foto) : base(aggregateID)
+        public FotoAdicionadaAnuncioEvent(Identity aggregateID, Foto foto) : base(aggregateID)
         {
             Foto = foto;
         }
 
-        private FotoAdicionadaAnuncioEvent(Guid aggregateID, long aggregateVersion, Foto foto) : base(aggregateID, aggregateVersion)
+        private FotoAdicionadaAnuncioEvent(Identity aggregateID, long aggregateVersion, Foto foto) : base(aggregateID, aggregateVersion)
         {
             Foto = foto;
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new FotoAdicionadaAnuncioEvent(aggregateId, aggregateVersion, Foto);
         }

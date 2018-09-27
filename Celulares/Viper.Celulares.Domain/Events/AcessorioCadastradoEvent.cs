@@ -9,17 +9,17 @@ namespace Viper.Celulares.Domain.Events
     public class AcessorioCadastradoEvent : DomainEventBase
     {
         public string Descricao { get; private set; }
-        public AcessorioCadastradoEvent(Guid aggregateID, string descricao) : base(aggregateID)
+        public AcessorioCadastradoEvent(Identity aggregateID, string descricao) : base(aggregateID)
         {
             Descricao = descricao;
         }
 
-        private AcessorioCadastradoEvent(Guid aggregateID, long aggregateVersion, string descricao) : base(aggregateID, aggregateVersion)
+        private AcessorioCadastradoEvent(Identity aggregateID, long aggregateVersion, string descricao) : base(aggregateID, aggregateVersion)
         {
             Descricao = descricao;
         }
 
-        public override DomainEventBase WithAggregate(Guid aggregateId, long aggregateVersion)
+        public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)
         {
             return new AcessorioCadastradoEvent(aggregateId, aggregateVersion, Descricao);
         }

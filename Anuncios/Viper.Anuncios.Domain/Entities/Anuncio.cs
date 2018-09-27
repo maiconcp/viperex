@@ -7,7 +7,7 @@ using Viper.Anuncios.Domain.ValuesObjects;
 
 namespace Viper.Anuncios.Domain.Entities
 {
-    public sealed partial class Anuncio : AggregateRoot
+    public partial class Anuncio : AggregateRoot
     {
         public string Titulo { get; private set; }
 

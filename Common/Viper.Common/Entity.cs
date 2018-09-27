@@ -4,11 +4,11 @@ namespace Viper.Common
 {
     public abstract class Entity 
     {
-        public Guid Id { get; protected set; }
+        public Identity Id { get; protected set; }
 
         public Entity()
         {
-            Id = Guid.NewGuid();
+            Id = Identity.CreateNew();
         }
 
         public override bool Equals(object obj)

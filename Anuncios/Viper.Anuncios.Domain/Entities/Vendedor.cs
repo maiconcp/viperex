@@ -6,11 +6,11 @@ namespace Viper.Anuncios.Domain.Entities
 {
     public class Vendedor : AggregateRoot
     {
-        public Guid IdUsuario { get; private set; }
+        public Identity IdUsuario { get; private set; }
         public string Telefone {get; private set;}
         public string EnderecoCompleto {get; private set;}
 
-        public Vendedor(Guid idUsuario, string telefone, string enderecoCompleto)
+        public Vendedor(Identity idUsuario, string telefone, string enderecoCompleto)
         {
             IdUsuario = idUsuario;
             Telefone = telefone;
