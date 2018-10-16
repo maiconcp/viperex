@@ -1,7 +1,9 @@
 ﻿using Flunt.Validations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Viper.Anuncios.Domain.Events;
 using Viper.Anuncios.Domain.ValuesObjects;
 using Viper.Celulares.Domain.Events;
 using Viper.Common;
@@ -17,6 +19,12 @@ namespace Viper.Celulares.Domain.Entities
             : base(titulo, descricao, preco, condicaoUso, aceitoTroca)
         {
             _acessorios = new List<Identity>();
+        }
+
+        protected Anuncio(Identity aggregateId)
+            : base(aggregateId)
+        {
+
         }
 
         public void AdicionarAcessorio(Identity acessorioId)

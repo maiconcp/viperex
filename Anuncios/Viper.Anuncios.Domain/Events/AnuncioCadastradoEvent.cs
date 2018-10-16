@@ -23,6 +23,7 @@ namespace Viper.Anuncios.Domain.Events
             Descricao = descricao;
             Preco = preco;
             CondicaoUso = condicaoUso;
+            AceitoTroca = aceitoTroca;
         }
 
         private AnuncioCadastradoEvent(Identity aggregateID, long aggregateVersion, string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca) : base(aggregateID, aggregateVersion)
@@ -31,6 +32,7 @@ namespace Viper.Anuncios.Domain.Events
             Descricao = descricao;
             Preco = preco;
             CondicaoUso = condicaoUso;
+            AceitoTroca = aceitoTroca;
         }
 
         public override DomainEventBase WithAggregate(Identity aggregateId, long aggregateVersion)

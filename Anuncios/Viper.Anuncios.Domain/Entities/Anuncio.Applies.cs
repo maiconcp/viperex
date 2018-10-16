@@ -11,7 +11,6 @@ namespace Viper.Anuncios.Domain.Entities
     {
         public void Apply(AnuncioCadastradoEvent @event)
         {
-            Id = @event.AggregateId;
             Titulo = @event.Titulo;
             Descricao = @event.Descricao;
             Preco = @event.Preco;

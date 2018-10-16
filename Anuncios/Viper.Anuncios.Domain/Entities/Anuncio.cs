@@ -25,7 +25,7 @@ namespace Viper.Anuncios.Domain.Entities
 
         public bool AceitoTroca { get; private set; }
 
-        public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca)
+        public Anuncio(string titulo, string descricao, decimal preco, CondicaoUso condicaoUso, bool aceitoTroca) 
         {
             new Contract().Requires()
                         .HasMaxLen(titulo, 100, nameof(titulo), "Título pode ter até cem caracteres")
@@ -36,6 +36,11 @@ namespace Viper.Anuncios.Domain.Entities
                         .Check();
 
             RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco, condicaoUso, aceitoTroca));
+        }
+
+        protected Anuncio(Identity aggregateId) : base(aggregateId)
+        {
+
         }
 
         public void Vender()

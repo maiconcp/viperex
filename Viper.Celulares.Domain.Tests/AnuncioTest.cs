@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Viper.Anuncios.Domain.Events;
 using Viper.Anuncios.Domain.ValuesObjects;
 using Viper.Celulares.Domain.Entities;
 using Viper.Common;
@@ -55,6 +56,33 @@ namespace Viper.Celulares.Domain.Tests
 
         }
 
+        [Fact]
+        public void Reidratar_Condicao_Resultado()
+        {
+            // Arrange
+            var anuncioId = Identity.CreateNew();
+            var foto = new Foto(new Uri("http://viperex.com.br/foto.png"));
+            var anuncioCadastrado = new AnuncioCadastradoEvent(anuncioId, "Titulo", "Descricao", preco: 10.0M, condicaoUso: CondicaoUso.Novo, aceitoTroca: true);
+            var fotoIncluida = new FotoAdicionadaAnuncioEvent(anuncioId, foto);
+            var anuncioPublicado = new AnuncioPublicadoEvent(anuncioId);
+
+            var eventos = new List<DomainEventBase>() { anuncioCadastrado, fotoIncluida, anuncioPublicado };
+
+            // Act
+            var anuncio =  Anuncio.Reidratar<Anuncio>(eventos);
+
+            // Assert
+            Assert.Equal(anuncioId, anuncio.Id);
+            Assert.Equal("Titulo", anuncio.Titulo);
+            Assert.Equal("Descricao", anuncio.Descricao);
+            Assert.Equal(10.0m, anuncio.Preco);
+            Assert.Equal(CondicaoUso.Novo, anuncio.CondicaoUso);
+            Assert.True(anuncio.AceitoTroca);
+
+            Assert.Equal(foto, anuncio.Fotos.Capa);
+
+            Assert.Equal(Status.Publicado, anuncio.Status);
+        }
     }
 }
 
