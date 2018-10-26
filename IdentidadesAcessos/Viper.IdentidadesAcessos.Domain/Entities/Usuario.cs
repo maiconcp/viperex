@@ -27,5 +27,9 @@ namespace Viper.IdentidadesAcessos.Domain.Entities
                          .IsNotNullOrWhiteSpace(email?.ToString(), nameof(Email), Messages.RequiredField("E-mail"))
                          .Check();                         
         }
+
+        protected override void RegisterEventHandlers()
+        {            
+        }
     }
 }

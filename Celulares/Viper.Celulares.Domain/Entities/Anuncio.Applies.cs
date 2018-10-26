@@ -7,7 +7,14 @@ namespace Viper.Celulares.Domain.Entities
 {
     public sealed partial class Anuncio
     {
-        public void Apply(AcessorioAdicionadoAoAnuncioEvent @event)
+        protected override void RegisterEventHandlers()
+        {
+            base.RegisterEventHandlers();
+
+            Register<AcessorioAdicionadoAoAnuncioEvent>(Apply);
+        }
+
+        private void Apply(AcessorioAdicionadoAoAnuncioEvent @event)
         {
             _acessorios.Add(@event.AcessorioId);
         }

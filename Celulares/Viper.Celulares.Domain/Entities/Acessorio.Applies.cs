@@ -8,10 +8,15 @@ namespace Viper.Celulares.Domain.Entities
 {
     public sealed partial class Acessorio : AggregateRoot
     {
-        public void Apply(AcessorioCadastradoEvent @event)
+        protected override void RegisterEventHandlers()
+        {
+            Register<AcessorioCadastradoEvent>(Apply);
+        }
+
+        private void Apply(AcessorioCadastradoEvent @event)
         {
             Id = @event.AggregateId;
             Descricao = @event.Descricao;
-        }
+        }       
     }
 }

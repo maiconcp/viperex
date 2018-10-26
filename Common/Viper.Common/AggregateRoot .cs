@@ -12,21 +12,31 @@ namespace Viper.Common
         private long _version = NewAggregateVersion;
         private readonly List<DomainEventBase> _domainEvents = new List<DomainEventBase>();
         public IReadOnlyList<DomainEventBase> DomainEvents => _domainEvents;
-        protected AggregateRoot(Identity aggregateId) : base()
+        private readonly Dictionary<Type, Action<DomainEventBase>> _eventHandlers = new Dictionary<Type, Action<DomainEventBase>>();
+
+        protected void Register<T>(Action<T> handler) where T : DomainEventBase
+        {
+            _eventHandlers.Add(typeof(T), @event => handler((T)@event));
+        }
+
+        protected AggregateRoot(Identity aggregateId) : this()
         {
             Id = aggregateId;
         }
 
         public AggregateRoot() : base()
         {
-
+            RegisterEventHandlers();
         }
+
+        protected abstract void RegisterEventHandlers();
 
         protected void ApplyEvent(DomainEventBase @event, long version)
         {
             if (!_domainEvents.Any(x => Equals(x.EventId, @event.EventId)))
             {
-                ((dynamic)this).Apply((dynamic)@event);
+                _eventHandlers[@event.GetType()](@event);
+
                 _version = version;
             }
         }

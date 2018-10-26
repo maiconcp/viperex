@@ -22,5 +22,10 @@ namespace Viper.Anuncios.Domain.Entities
                           .IsNotNullOrWhiteSpace(enderecoCompleto, nameof(EnderecoCompleto), Messages.RequiredField("Endereço Completo"))
                           .Check();
         }
+
+        protected override void RegisterEventHandlers()
+        {
+            
+        }
     }
 }
