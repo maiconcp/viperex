@@ -14,6 +14,11 @@ namespace Viper.Common
             Id = id;
         }
 
+        public Identity(string id)
+        {
+            Id = new Guid(id);
+        }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Id;

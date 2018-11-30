@@ -15,6 +15,16 @@ namespace Flunt.Validations
             return contract;
         }
 
+        public static Contract IsGuid(this Contract contract, string val, string property, string message)
+        {
+            bool isValidGuid = Guid.TryParse(val, out Guid temp);
+            
+            if (!isValidGuid)
+                contract.AddNotification(property, message);
+
+            return contract;
+        }
+
         /// <summary>
         /// Verifica se o contrato possue notificações, caso sim, lança uma DomainException.       
         /// </summary>

@@ -62,5 +62,37 @@ namespace Viper.Common.Tests
             // Assert
             Assert.True(exception.Message.Contains("Notificacao Qualquer"));
         }
+
+        [Fact]
+        public void IsGuid_StringEhGuid_SemNotificacao()
+        {
+            // Arrange
+            var contract = new Contract();
+
+            // Act
+            contract.IsGuid("6F54CD75-399F-4975-B9CB-9A7D5A631C2A", "Propriedade Qualquer", "Mensagem Qualquer");
+
+            // Assert
+            Assert.Equal(0, contract.Notifications.Count);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("  ")]
+        [InlineData("6F54CD75")]
+        [InlineData("6F54CD75-399F")]
+        [InlineData("6F54CD75-399F-4975-B9CB-9A7D5A631C2AA")]
+        public void IsGuid_StringNaoEhGuid_UmaNotificacao(string texto)
+        {
+            // Arrange
+            var contract = new Contract();
+
+            // Act
+            contract.IsGuid(texto, "Propriedade Qualquer", "Mensagem Qualquer");
+
+            // Assert
+            Assert.Equal(1, contract.Notifications.Count);
+        }
     }
 }
