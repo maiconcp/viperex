@@ -15,7 +15,7 @@ namespace Viper.Anuncios.Domain.ValuesObjects
         {
             new Contract().Requires()
                           .IsNotNull(enderecoFoto, nameof(EnderecoFoto), "O endereço da foto é inválido.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             EnderecoFoto = enderecoFoto;
         }

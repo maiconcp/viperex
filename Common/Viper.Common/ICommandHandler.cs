@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Viper.Common
 {
-    public interface ICommandHandler<T> where T : ICommand
+    public interface ICommandHandler<T> where T : Command
     {
         void Handle(T command);
     }

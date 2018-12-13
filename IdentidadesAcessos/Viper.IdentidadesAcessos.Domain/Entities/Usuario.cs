@@ -21,11 +21,11 @@ namespace Viper.IdentidadesAcessos.Domain.Entities
                           .IsNotNull(nomeCompleto, nameof(NomeCompleto), Messages.RequiredField("Nome Completo"))
                           .IsNotNull(email, nameof(Email), Messages.RequiredField("E-mail"))
                           .IsNotNull(senha, nameof(Senha), Messages.RequiredField("Senha"))
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             new Contract().Requires()
                          .IsNotNullOrWhiteSpace(email?.ToString(), nameof(Email), Messages.RequiredField("E-mail"))
-                         .Check();                         
+                         .ThrowExceptionIfInvalid();                         
         }
 
         protected override void RegisterEventHandlers()

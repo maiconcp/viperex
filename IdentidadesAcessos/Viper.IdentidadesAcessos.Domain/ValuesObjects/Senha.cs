@@ -15,7 +15,7 @@ namespace Viper.IdentidadesAcessos.Domain.ValuesObjects
 
             new Contract().Requires()
                           .HasMinLen(senha, MIN_CARACTERES, "Senha", $"A senha deve ter no mínimo {MIN_CARACTERES} caracteres.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
         }
  
         protected override IEnumerable<object> GetEqualityComponents()

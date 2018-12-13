@@ -14,7 +14,7 @@ namespace Viper.Celulares.Domain.Entities
         {
             new Contract().Requires()
                           .IsNotNullOrWhiteSpace(descricao, nameof(Descricao),Messages.RequiredField("Descrição"))
-                          .Check();            
+                          .ThrowExceptionIfInvalid();            
 
             RaiseEvent(new AcessorioCadastradoEvent(Id, descricao));
         }

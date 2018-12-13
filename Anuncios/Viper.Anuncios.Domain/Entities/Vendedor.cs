@@ -20,7 +20,7 @@ namespace Viper.Anuncios.Domain.Entities
                           .IsNotNull(idUsuario, nameof(IdUsuario), Messages.RequiredField("Usuário"))
                           .IsNotNullOrWhiteSpace(telefone, nameof(telefone), Messages.RequiredField("Telefone"))
                           .IsNotNullOrWhiteSpace(enderecoCompleto, nameof(EnderecoCompleto), Messages.RequiredField("Endereço Completo"))
-                          .Check();
+                          .ThrowExceptionIfInvalid();
         }
 
         protected override void RegisterEventHandlers()

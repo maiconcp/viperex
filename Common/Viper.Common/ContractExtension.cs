@@ -1,5 +1,6 @@
 using System;
 using Flunt;
+using Flunt.Notifications;
 using Flunt.Validations;
 using Viper.Common;
 
@@ -28,7 +29,7 @@ namespace Flunt.Validations
         /// <summary>
         /// Verifica se o contrato possue notificações, caso sim, lança uma DomainException.       
         /// </summary>
-        public static void Check(this Contract contract)
+        public static void ThrowExceptionIfInvalid(this Notifiable contract)
         {
             if (contract.Invalid)
                 throw new DomainException(contract.Notifications);

@@ -35,7 +35,7 @@ namespace Viper.Anuncios.Domain.ValuesObjects
         {
             new Contract().Requires()
                           .IsFalse(Completo, nameof(Fotos), "O Álbum já está completo.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             var fotos = Fotos.ToList();
             fotos.Add(foto);
@@ -47,13 +47,13 @@ namespace Viper.Anuncios.Domain.ValuesObjects
         {
             new Contract().Requires()
                           .IsFalse(Vazio, nameof(Fotos), "O Álbum está vazio.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             var fotos = Fotos.ToList();
 
             new Contract().Requires()
                           .IsTrue(fotos.Remove(foto), nameof(Fotos), "A foto não pertence ao álbum.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             return new AlbumFotos(fotos);
         }

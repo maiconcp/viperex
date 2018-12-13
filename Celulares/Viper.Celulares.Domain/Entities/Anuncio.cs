@@ -32,7 +32,7 @@ namespace Viper.Celulares.Domain.Entities
             new Contract().Requires()
                           .IsFalse(_acessorios.Contains(acessorioId), nameof(Acessorios), "Acessório já incluído.")
                           .IsTrue(Status.EhPendente(), nameof(Status), $"Acessório não pode ser incluído no status: { Status }")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             RaiseEvent(new AcessorioAdicionadoAoAnuncioEvent(Id, acessorioId));
         }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Viper.Common\Viper.Common.csproj" />
+    <ProjectReference Include="..\Viper.Celulares.Domain\Viper.Celulares.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -33,7 +33,7 @@ namespace Viper.Anuncios.Domain.Entities
                         .IsNotNullOrWhiteSpace(descricao, nameof(descricao), Messages.RequiredField(descricao))
                         .IsGreaterThan(preco, 0, nameof(Preco), "O Preço deve ser maior do que zero.")
                         .IsNotNull(condicaoUso, nameof(CondicaoUso), Messages.RequiredField("Condição de Uso"))
-                        .Check();
+                        .ThrowExceptionIfInvalid();
 
             RaiseEvent(new AnuncioCadastradoEvent(Id, titulo, descricao, preco, condicaoUso, aceitoTroca));
         }
@@ -47,7 +47,7 @@ namespace Viper.Anuncios.Domain.Entities
         {
             new Contract().Requires()
                           .IsTrue(Status.EhPublicado(), nameof(Status), "Anúncio não está mais disponível.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             RaiseEvent(new AnuncioVendidoEvent(Id, DateTime.Now));            
         }
@@ -56,7 +56,7 @@ namespace Viper.Anuncios.Domain.Entities
         {
             new Contract().Requires()
                           .IsTrue(Status.EhPendente(), nameof(Status), $"O anúncio deve estar {Status.Pendente}.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
             
             RaiseEvent(new AnuncioPublicadoEvent(Id));
         }
@@ -65,7 +65,7 @@ namespace Viper.Anuncios.Domain.Entities
         {
             new Contract().Requires()
                           .IsTrue(Status.EhPendente(), nameof(Status), $"O anúncio deve estar {Status.Pendente}.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
             
             RaiseEvent(new AnuncioRejeitadoEvent(Id));
         }
@@ -74,7 +74,7 @@ namespace Viper.Anuncios.Domain.Entities
         {
             new Contract().Requires()
                           .IsTrue(Status.PodeSerExcluido(), nameof(Status), $"O anúncio não pode estar {Status}.")
-                          .Check();
+                          .ThrowExceptionIfInvalid();
 
             Status = Status.Excluido;
         }

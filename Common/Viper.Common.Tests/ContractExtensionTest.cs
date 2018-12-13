@@ -43,7 +43,7 @@ namespace Viper.Common.Tests
 
             // Act            
             // Assert
-            contract.Check();
+            contract.ThrowExceptionIfInvalid();
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Viper.Common.Tests
             // Act
             var exception = Assert.Throws<DomainException>(() =>
             {
-                contract.Check();
+                contract.ThrowExceptionIfInvalid();
             });
 
             // Assert

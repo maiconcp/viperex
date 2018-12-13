@@ -17,7 +17,7 @@ namespace Viper.SharedKernel.ValuesObjects
                 .IsNotNullOrWhiteSpace(sobrenome, nameof(Sobrenome), Messages.RequiredField(nameof(Sobrenome)))
                 .IsFalse(TemCaracteresInvalidos(nome), nameof(nome), "O 'Nome' informado contém caracteres inválidos.")
                 .IsFalse(TemCaracteresInvalidos(sobrenome), nameof(sobrenome), "O 'Sobrenome' informado contém caracteres inválidos.")
-                .Check();
+                .ThrowExceptionIfInvalid();
                 
             Nome = nome;
             Sobrenome = sobrenome;
