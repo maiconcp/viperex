@@ -1,7 +1,8 @@
 The objective of this project is to improve the authors' technology studies: [Leandro](https://github.com/Leandroavieira) e [Maicon](https://github.com/maiconcp)
 
 #### Case study:  
-An e-commerce platform similar to [OLX] (http://olx.com.br/).  
+An e-commerce platform similar to [OLX] (http://olx.com.br/) that here are called *Viperex*
+
 
 #### Assumptions:  
 * Learning comes first  
