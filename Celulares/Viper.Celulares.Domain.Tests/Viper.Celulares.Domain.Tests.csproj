@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Anuncios\Viper.Anuncios.Domain.Tests\Viper.Anuncios.Domain.Tests.csproj" />
-    <ProjectReference Include="..\Anuncios\Viper.Anuncios.Domain\Viper.Anuncios.Domain.csproj" />
-    <ProjectReference Include="..\Celulares\Viper.Celulares.Domain\Viper.Celulares.Domain.csproj" />
+    <ProjectReference Include="..\..\Anuncios\Viper.Anuncios.Domain.Tests\Viper.Anuncios.Domain.Tests.csproj" />
+    <ProjectReference Include="..\..\Anuncios\Viper.Anuncios.Domain\Viper.Anuncios.Domain.csproj" />
+    <ProjectReference Include="..\Viper.Celulares.Domain\Viper.Celulares.Domain.csproj" />
   </ItemGroup>
 
 </Project>

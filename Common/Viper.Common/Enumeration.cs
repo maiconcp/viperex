@@ -59,9 +59,18 @@ namespace Viper.Common
 
         public static T FromDescription(string description) 
         {
-            var matchingItem = Parse<string>(description, "description", item => item.Description == description);
+            var matchingItem = Parse<string>(description, "description", item => item.Description.Equals(description, StringComparison.InvariantCultureIgnoreCase));
             return matchingItem;
         }
+
+        public static T FromValueOrDescription(string valueOrDescription)
+        {
+            if (Int32.TryParse(valueOrDescription, out int id))
+                return FromValue(id);
+
+            return FromDescription(valueOrDescription);
+        }
+
 
         private static T Parse<K>(K value, string description, Func<T, bool> predicate) 
         {
