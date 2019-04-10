@@ -15,6 +15,15 @@ namespace Viper.Celulares.Api.Controllers
     [ApiController]
     public class AnunciosController : ControllerBase
     {
+        private readonly IEventStore<Anuncio> AnuncioEventStore;
+        private readonly ICommandHandler<CadastrarAnuncioCommand, Anuncio> CadastrarAnuncioCommandHandler;
+
+        public AnunciosController(IEventStore<Anuncio> anuncioEventStore, ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler)
+        {
+            AnuncioEventStore = anuncioEventStore;
+            CadastrarAnuncioCommandHandler = cadastrarAnuncioCommandHandler;
+        }
+
         // api/{versao}/{dominio}/{recurso}
         // POST api/v1/celulares/fabricantes -> inclui fabricante
         // POST api/v1/celulares/modelos -> inclui modelo
@@ -23,26 +32,21 @@ namespace Viper.Celulares.Api.Controllers
         [HttpGet("{id}")]    
         public ActionResult ObterAnuncio(string id)
         {
-            var eventStore = new AnuncioEventStore();
-
-            return Ok(eventStore.Get(new Identity(id)));
+            return Ok(AnuncioEventStore.Get(new Identity(id)));
         }
 
 
         [HttpGet]
         public ActionResult ObterTodosAnuncios()
         {
-            var eventStore = new AnuncioEventStore();
-
-            return Ok(new List<Anuncio>() { eventStore.Get(new Identity(Guid.NewGuid())) });
+            return Ok(new List<Anuncio>() { AnuncioEventStore.Get(new Identity(Guid.NewGuid())) });
         }
 
         // POST api/v1/celulares/anuncios -> inclui anuncio
         [HttpPost()]
         public ActionResult CadastrarAnuncio([FromBody] CadastrarAnuncioCommand command)
         {
-            var eventStore = new AnuncioEventStore();
-            var handler = new CadastrarAnuncioCommandHandler(eventStore);
+            var handler = CadastrarAnuncioCommandHandler;
 
             command.Validate();
 
@@ -64,12 +68,12 @@ namespace Viper.Celulares.Api.Controllers
             if (id != command.AnuncioId)
                 throw new InvalidOperationException();
 
-            var eventStore = new AnuncioEventStore();
-            var handler = new AdicionarAcessorioAnuncioCommandHandler(eventStore);
+            var handler = new AdicionarAcessorioAnuncioCommandHandler(AnuncioEventStore);
 
             return handler.Handle(command);
         }
     }
+
     public class AnuncioEventStore : IEventStore<Anuncio> 
     {
         public Anuncio AggregateToRead { get; set; }
@@ -86,6 +90,28 @@ namespace Viper.Celulares.Api.Controllers
         }
 
         public void Store(Anuncio aggregateRoot)
+        {
+            AggregateStored = aggregateRoot;
+        }
+    }
+
+
+    public class EventStore<T> : IEventStore<T> where T: AggregateRoot
+    {
+        public T AggregateToRead { get; set; }
+        public T AggregateStored { get; private set; }
+
+        public EventStore()
+        {
+            AggregateToRead = new Anuncio("Titulo", "Descricao", 10.0M, CondicaoUso.Usado, aceitoTroca: true) as T;
+        }
+
+        public T Get(Identity id)
+        {
+            return AggregateToRead;
+        }
+
+        public void Store(T aggregateRoot)
         {
             AggregateStored = aggregateRoot;
         }

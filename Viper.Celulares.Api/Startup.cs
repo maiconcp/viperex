@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Viper.Celulares.Domain.Entities;
+using Viper.Celulares.Api.Controllers;
+using Viper.Celulares.Application.Commands;
+using Viper.Common;
 
 namespace Viper.Celulares.Api
 {
@@ -26,6 +30,9 @@ namespace Viper.Celulares.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped(typeof(IEventStore<>), typeof(EventStore<>));
+            services.AddTransient<ICommandHandler<CadastrarAnuncioCommand, Anuncio>, CadastrarAnuncioCommandHandler>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
