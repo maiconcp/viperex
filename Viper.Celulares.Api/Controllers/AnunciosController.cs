@@ -17,11 +17,16 @@ namespace Viper.Celulares.Api.Controllers
     {
         private readonly IEventStore<Anuncio> AnuncioEventStore;
         private readonly ICommandHandler<CadastrarAnuncioCommand, Anuncio> CadastrarAnuncioCommandHandler;
+        private readonly ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> AdicionarAcessorioAnuncioCommandHandler;
 
-        public AnunciosController(IEventStore<Anuncio> anuncioEventStore, ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler)
+        public AnunciosController(
+            IEventStore<Anuncio> anuncioEventStore, 
+            ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler, 
+            ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> adicionarAcessorioAnuncioCommandHandler)
         {
             AnuncioEventStore = anuncioEventStore;
             CadastrarAnuncioCommandHandler = cadastrarAnuncioCommandHandler;
+            AdicionarAcessorioAnuncioCommandHandler = adicionarAcessorioAnuncioCommandHandler;
         }
 
         // api/{versao}/{dominio}/{recurso}
@@ -68,7 +73,7 @@ namespace Viper.Celulares.Api.Controllers
             if (id != command.AnuncioId)
                 throw new InvalidOperationException();
 
-            var handler = new AdicionarAcessorioAnuncioCommandHandler(AnuncioEventStore);
+            var handler = AdicionarAcessorioAnuncioCommandHandler;
 
             return handler.Handle(command);
         }

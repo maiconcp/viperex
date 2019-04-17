@@ -30,9 +30,9 @@ namespace Viper.Celulares.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddScoped(typeof(IEventStore<>), typeof(EventStore<>));
-            services.AddTransient<ICommandHandler<CadastrarAnuncioCommand, Anuncio>, CadastrarAnuncioCommandHandler>();            
+            services.AddTransient<ICommandHandler<CadastrarAnuncioCommand, Anuncio>, CadastrarAnuncioCommandHandler>();
+            services.AddTransient<ICommandHandler<AdicionarAcessorioAnuncioCommand, bool>, AdicionarAcessorioAnuncioCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
