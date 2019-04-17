@@ -51,14 +51,12 @@ namespace Viper.Celulares.Api.Controllers
         [HttpPost()]
         public ActionResult CadastrarAnuncio([FromBody] CadastrarAnuncioCommand command)
         {
-            var handler = CadastrarAnuncioCommandHandler;
-
             command.Validate();
 
             if (command.Invalid)
                 return BadRequest(command.Notifications);            
 
-            var anuncioCriado = (handler.Handle(command));
+            var anuncioCriado = (CadastrarAnuncioCommandHandler.Handle(command));
 
             return Created(Url.Action(nameof(ObterAnuncio), new { id = anuncioCriado.Id.ToString() }), anuncioCriado);
         }
@@ -67,15 +65,18 @@ namespace Viper.Celulares.Api.Controllers
         [HttpPost("{id}/acessorios")]
         public object AdicionarAcessorioAoAnuncio(string id, [FromBody] AdicionarAcessorioAnuncioCommand command)
         {
+            command.Validate();
+
+            if (command.Invalid)
+                return BadRequest(command.Notifications);
+
             if (string.IsNullOrEmpty(command.AnuncioId))
                 command.AnuncioId = id;
 
             if (id != command.AnuncioId)
                 throw new InvalidOperationException();
 
-            var handler = AdicionarAcessorioAnuncioCommandHandler;
-
-            return handler.Handle(command);
+            return AdicionarAcessorioAnuncioCommandHandler.Handle(command);
         }
     }
 
