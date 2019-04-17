@@ -17,17 +17,14 @@ namespace Viper.Celulares.Api.Controllers
     public class AnunciosController : ControllerBase
     {
         private readonly IEventStore<Anuncio> AnuncioEventStore;
-        private readonly ICommandHandler<CadastrarAnuncioCommand, Anuncio> CadastrarAnuncioCommandHandler;
-        private readonly ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> AdicionarAcessorioAnuncioCommandHandler;
+        private readonly ICommandBus CommandBus;
 
         public AnunciosController(
             IEventStore<Anuncio> anuncioEventStore,
-            ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler,
-            ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> adicionarAcessorioAnuncioCommandHandler)
+            ICommandBus commandBus)
         {
             AnuncioEventStore = anuncioEventStore;
-            CadastrarAnuncioCommandHandler = cadastrarAnuncioCommandHandler;
-            AdicionarAcessorioAnuncioCommandHandler = adicionarAcessorioAnuncioCommandHandler;
+            CommandBus = commandBus;
         }
 
         // api/{versao}/{dominio}/{recurso}
@@ -52,7 +49,7 @@ namespace Viper.Celulares.Api.Controllers
         [HttpPost()]
         public ActionResult CadastrarAnuncio([FromBody] CadastrarAnuncioCommand command)
         {
-            var anuncioCriado = (CadastrarAnuncioCommandHandler.Handle(command));
+            var anuncioCriado = CommandBus.Send<CadastrarAnuncioCommand, Anuncio>(command);
 
             return Created(Url.Action(nameof(ObterAnuncio), new { id = anuncioCriado.Id.ToString() }), anuncioCriado);
         }
@@ -67,7 +64,7 @@ namespace Viper.Celulares.Api.Controllers
             if (id != command.AnuncioId)
                 throw new InvalidOperationException();
 
-            return AdicionarAcessorioAnuncioCommandHandler.Handle(command);
+            return CommandBus.Send<AdicionarAcessorioAnuncioCommand, bool>(command);
         }
     }
 

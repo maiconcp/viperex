@@ -19,9 +19,6 @@ namespace Viper.Celulares.Application.Commands
 
         public Anuncio Handle(CadastrarAnuncioCommand command)
         {
-            command.Validate();
-            command.ThrowExceptionIfInvalid();
-
             var condicaoUso = CondicaoUso.FromValueOrDescription(command.CondicaoUso);
 
             var anuncio = new Anuncio(command.Titulo, command.Descricao, command.Preco, condicaoUso, command.AceitoTroca);
