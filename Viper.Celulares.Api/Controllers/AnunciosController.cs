@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Flunt.Validations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Viper.Anuncios.Domain.ValuesObjects;
@@ -20,8 +21,8 @@ namespace Viper.Celulares.Api.Controllers
         private readonly ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> AdicionarAcessorioAnuncioCommandHandler;
 
         public AnunciosController(
-            IEventStore<Anuncio> anuncioEventStore, 
-            ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler, 
+            IEventStore<Anuncio> anuncioEventStore,
+            ICommandHandler<CadastrarAnuncioCommand, Anuncio> cadastrarAnuncioCommandHandler,
             ICommandHandler<AdicionarAcessorioAnuncioCommand, bool> adicionarAcessorioAnuncioCommandHandler)
         {
             AnuncioEventStore = anuncioEventStore;
@@ -34,7 +35,7 @@ namespace Viper.Celulares.Api.Controllers
         // POST api/v1/celulares/modelos -> inclui modelo
         // POST api/v1/celulares/acessorios -> inclui acessorio (capinha)
 
-        [HttpGet("{id}")]    
+        [HttpGet("{id}")]
         public ActionResult ObterAnuncio(string id)
         {
             return Ok(AnuncioEventStore.Get(new Identity(id)));
@@ -51,11 +52,6 @@ namespace Viper.Celulares.Api.Controllers
         [HttpPost()]
         public ActionResult CadastrarAnuncio([FromBody] CadastrarAnuncioCommand command)
         {
-            command.Validate();
-
-            if (command.Invalid)
-                return BadRequest(command.Notifications);            
-
             var anuncioCriado = (CadastrarAnuncioCommandHandler.Handle(command));
 
             return Created(Url.Action(nameof(ObterAnuncio), new { id = anuncioCriado.Id.ToString() }), anuncioCriado);
@@ -65,11 +61,6 @@ namespace Viper.Celulares.Api.Controllers
         [HttpPost("{id}/acessorios")]
         public object AdicionarAcessorioAoAnuncio(string id, [FromBody] AdicionarAcessorioAnuncioCommand command)
         {
-            command.Validate();
-
-            if (command.Invalid)
-                return BadRequest(command.Notifications);
-
             if (string.IsNullOrEmpty(command.AnuncioId))
                 command.AnuncioId = id;
 
@@ -80,7 +71,7 @@ namespace Viper.Celulares.Api.Controllers
         }
     }
 
-    public class AnuncioEventStore : IEventStore<Anuncio> 
+    public class AnuncioEventStore : IEventStore<Anuncio>
     {
         public Anuncio AggregateToRead { get; set; }
         public Anuncio AggregateStored { get; private set; }
@@ -102,7 +93,7 @@ namespace Viper.Celulares.Api.Controllers
     }
 
 
-    public class EventStore<T> : IEventStore<T> where T: AggregateRoot
+    public class EventStore<T> : IEventStore<T> where T : AggregateRoot
     {
         public T AggregateToRead { get; set; }
         public T AggregateStored { get; private set; }

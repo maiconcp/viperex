@@ -40,7 +40,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Celulares.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Celulares.Application.Tests", "Celulares\Viper.Celulares.Application.Tests\Viper.Celulares.Application.Tests.csproj", "{1F4C9F84-DA36-442C-B58B-1B79013DE357}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viper.Celulares.Api", "Viper.Celulares.Api\Viper.Celulares.Api.csproj", "{31B4688E-063D-446D-9568-E1C50BDC7BCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viper.Celulares.Api", "Viper.Celulares.Api\Viper.Celulares.Api.csproj", "{31B4688E-063D-446D-9568-E1C50BDC7BCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viper.Commom.Api", "Viper.Commom.Api\Viper.Commom.Api.csproj", "{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -220,6 +222,18 @@ Global
 		{31B4688E-063D-446D-9568-E1C50BDC7BCC}.Release|x64.Build.0 = Release|Any CPU
 		{31B4688E-063D-446D-9568-E1C50BDC7BCC}.Release|x86.ActiveCfg = Release|Any CPU
 		{31B4688E-063D-446D-9568-E1C50BDC7BCC}.Release|x86.Build.0 = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|x64.Build.0 = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,6 +253,7 @@ Global
 		{2AE4950D-9251-47CB-BF2F-8656CE97A4A3} = {F30536B9-7A2D-4673-ABC9-6025240A2C14}
 		{1F4C9F84-DA36-442C-B58B-1B79013DE357} = {F30536B9-7A2D-4673-ABC9-6025240A2C14}
 		{31B4688E-063D-446D-9568-E1C50BDC7BCC} = {F30536B9-7A2D-4673-ABC9-6025240A2C14}
+		{DFCD0D3A-C03E-4CD5-B858-E9D89FA082F9} = {137447B1-925E-4494-A499-B4D7D5C94959}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6819C959-18D0-46A0-B502-D4613C479E69}

@@ -14,6 +14,7 @@ using Viper.Celulares.Domain.Entities;
 using Viper.Celulares.Api.Controllers;
 using Viper.Celulares.Application.Commands;
 using Viper.Common;
+using Viper.Commom.Api;
 
 namespace Viper.Celulares.Api
 {
@@ -29,7 +30,10 @@ namespace Viper.Celulares.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(typeof(ExceptionFilter));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped(typeof(IEventStore<>), typeof(EventStore<>));
             services.AddTransient<ICommandHandler<CadastrarAnuncioCommand, Anuncio>, CadastrarAnuncioCommandHandler>();
             services.AddTransient<ICommandHandler<AdicionarAcessorioAnuncioCommand, bool>, AdicionarAcessorioAnuncioCommandHandler>();
